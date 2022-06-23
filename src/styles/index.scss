@@ -1,0 +1,17 @@
+@import "./LoginPage.scss";
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(33,93,255);
+    background: linear-gradient(90deg, rgba(33,93,255,1) 0%, rgba(1,116,7,1) 100%);
+}
+
+.app {
+    width: 100vw;
+    height: 100vh;
+}
