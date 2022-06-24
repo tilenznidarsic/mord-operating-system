@@ -1,4 +1,9 @@
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Anek+Malayalam&display=swap');
+
 @import "./LoginPage.scss";
+@import "./StatusBar.scss";
+@import "./AppBar.scss";
 
 * {
     padding: 0px;
@@ -7,8 +12,9 @@
 }
 
 body {
-    background: rgb(33,93,255);
-    background: linear-gradient(90deg, rgba(33,93,255,1) 0%, rgba(1,116,7,1) 100%);
+    font-family: 'Anek Malayalam', sans-serif;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
 }
 
 .app {

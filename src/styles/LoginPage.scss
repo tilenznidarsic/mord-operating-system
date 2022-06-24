@@ -20,6 +20,10 @@
             margin: 10px;
             background: none;
             border: none;
+            
+            &:focus {
+                outline: none;
+            }
 
             &::placeholder {
                 color: lightgray;

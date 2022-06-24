@@ -1,5 +1,7 @@
 import React from "react"
 import { useAuthGuard } from "../customHooks/useAuthGuard"
+import AppBar from "./AppBar"
+import StatusBar from "./StatusBar"
 
 
 export default function OSPage(): React.ReactElement {
@@ -7,7 +9,8 @@ export default function OSPage(): React.ReactElement {
 
     return (
         <div className="os-page">
-            <h1>OS {user && user.name}</h1>
+            <StatusBar username={user ? user.name : ""} />
+            <AppBar />
         </div>
     )
 }

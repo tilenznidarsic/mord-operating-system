@@ -1,0 +1,38 @@
+
+.status-bar {
+    width: 100%;
+    height: 25px;
+    position: fixed;
+    color: white;
+    background: rgb(18, 18, 18);
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    box-sizing: content-box;
+    
+    .container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+
+        &.center {
+            justify-content: center;
+        }
+
+        &.end {
+            justify-content: flex-end;
+        }
+
+        .logout-btn {
+            border: none;
+            background: none;
+            color: white;
+
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+    }
+}
