@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { LS_USERS_KEY } from "../constants"
 import { MordOSContext } from "./StoreProvider"
 import { useNavigate } from "react-router-dom"
-
+import CryptoJS from 'crypto-js';
 
 type User = {
     name: string,
@@ -21,7 +21,7 @@ export default function LoginPage(): React.ReactElement {
         const password = (document.getElementById("password-input") as HTMLInputElement).value
         const userFromDB = usersDB.find((user: User) => user.name === username)
 
-        if (userFromDB && userFromDB.password === password) {
+        if (userFromDB && userFromDB.password === CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex)) {
             setAuthenticatedUser(userFromDB)
             navigate("../os", { replace: true })
         }
