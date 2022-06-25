@@ -1,15 +1,5 @@
 
-.gallery-app-icon {
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, rgba(207,61,215,1) 23%, rgba(149,34,177,1) 64%);
-    border-radius: 10px;
-    margin: 0px 10px;
-}
-
-#gallery-app {
-    color: white;
-    
+#gallery-app {    
     .content {
         height: 100%;
         overflow-y: scroll;

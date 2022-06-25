@@ -9,7 +9,6 @@ import { MordOSContext } from "../StoreProvider";
 
 export default function CameraApp(): React.ReactElement {
     const { authenticatedUser } = useContext(MordOSContext)
-    const [isOpen, setIsOpen] = useState<boolean>(false)
     const webcamRef = useRef(null);
     const [image, setImage] = useState<string | null>(null)
 
@@ -39,36 +38,32 @@ export default function CameraApp(): React.ReactElement {
     }
 
     return (
-        <>
-            <div className={"camera-app-icon " + (isOpen ? "open" : "") } onClick={() => setIsOpen(!isOpen)}></div>
-            <AppWindow
-                appID="camera-app"
-                isOpen={isOpen}
-                closeFunc={() => setIsOpen(false)}
-                displayName="Camera"
-            >
-                {
-                    image ?
-                        <img src={image} alt="my-photo" />
-                        :
-                        <Webcam
-                            width={1280}
-                            height={720}
-                            screenshotFormat="image/jpeg"
-                            ref={webcamRef}
-                        />
-                    }
-                    <div className="controls">
-                    {!image ?
-                        <button className="record" onClick={capture}></button>
-                        :
-                        <>
-                            <button className="save" onClick={saveHandler}>SAVE</button>
-                            <button className="cancel" onClick={cancelHandler}>CANCEL</button>
-                        </>
-                    }
-                    </div>
-            </AppWindow>
-        </>
+        <AppWindow
+            appID="camera-app"
+            displayName="Camera"
+            iconID="camera"
+        >
+            {
+                image ?
+                    <img src={image} alt="my-photo" />
+                    :
+                    <Webcam
+                        width={1280}
+                        height={720}
+                        screenshotFormat="image/jpeg"
+                        ref={webcamRef}
+                    />
+                }
+                <div className="controls">
+                {!image ?
+                    <button className="record" onClick={capture}></button>
+                    :
+                    <>
+                        <button className="save" onClick={saveHandler}>SAVE</button>
+                        <button className="cancel" onClick={cancelHandler}>CANCEL</button>
+                    </>
+                }
+                </div>
+        </AppWindow>
     )
 }

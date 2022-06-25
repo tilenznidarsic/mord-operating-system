@@ -5,13 +5,14 @@
 @import "./StatusBar.scss";
 @import "./AppBar.scss";
 @import "./AppWindow.scss";
-@import "./SettingsApp.scss";
 @import "./OSPage.scss";
-@import "./RssReaderApp.scss";
-@import "./FileEditorApp.scss";
-@import "./BrowserApp.scss";
-@import "./CameraApp.scss";
-@import "./GalleryApp.scss";
+// Apps
+@import "./apps/SettingsApp.scss";
+@import "./apps/RssReaderApp.scss";
+@import "./apps/FileEditorApp.scss";
+@import "./apps/BrowserApp.scss";
+@import "./apps/CameraApp.scss";
+@import "./apps/GalleryApp.scss";
 
 * {
     padding: 0px;

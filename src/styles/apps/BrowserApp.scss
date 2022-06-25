@@ -1,15 +1,5 @@
 
-.browser-app-icon {
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, rgba(255,221,82,1) 23%, rgba(206,214,0,1) 100%);
-    border-radius: 10px;
-    margin: 0px 10px;
-}
-
 #browser-app {
-    color: white;
-
     .content {
         display: flex;
         flex-direction: column;

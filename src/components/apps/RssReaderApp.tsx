@@ -3,10 +3,8 @@ import AppWindow from "../AppWindow"
 
 
 export default function RssReaderApp(): React.ReactElement {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [data, setData] = useState([])
     const [page, setPage] = useState<number>(1)
-
 
     useEffect(() => {
         (async () => {
@@ -26,28 +24,24 @@ export default function RssReaderApp(): React.ReactElement {
     }
 
     return (
-        <>
-            <div className={"rss-reader-app-icon " + (isOpen ? "open" : "") } onClick={() => setIsOpen(!isOpen)}></div>
-            <AppWindow
-                appID="rss-reader-app"
-                isOpen={isOpen}
-                closeFunc={() => setIsOpen(false)}
-                displayName="RSS Reader"
-            >
-                {data.slice((page*20) - 20, page * 20).map((post: any, index: number) => (
-                    <RssPost
-                        key={`rssp-${index}`}
-                        post={post}
-                        page={page}
-                    />
-                ))}
-                <div className="pager">
-                    <button onClick={() => pageHandler(-1)}>{"<"}</button>
-                    <span>{page}</span>
-                    <button onClick={() => pageHandler(1)}>{">"}</button>
-                </div>
-            </AppWindow>
-        </>
+        <AppWindow
+            appID="rss-reader-app"
+            displayName="RSS Reader"
+            iconID={"rss-reader"}
+        >
+            {data.slice((page*20) - 20, page * 20).map((post: any, index: number) => (
+                <RssPost
+                    key={`rssp-${index}`}
+                    post={post}
+                    page={page}
+                />
+            ))}
+            <div className="pager">
+                <button onClick={() => pageHandler(-1)}>{"<"}</button>
+                <span>{page}</span>
+                <button onClick={() => pageHandler(1)}>{">"}</button>
+            </div>
+        </AppWindow>
     )
 }
 

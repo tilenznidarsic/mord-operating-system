@@ -8,7 +8,6 @@ import { File } from "../../types/File.type"
 
 export default function FileEditorApp(): React.ReactElement {
     const { authenticatedUser } = useContext(MordOSContext)
-    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [files, setFiles] = useState<Array<File>>(JSON.parse(localStorage.getItem(LS_FILES_KEY) ||"[]"))
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     
@@ -51,9 +50,7 @@ export default function FileEditorApp(): React.ReactElement {
 
     }, [selectedFile])
 
-    const fileClickHandler = (file: File | null) => {
-        setSelectedFile(file)
-    }
+    const fileClickHandler = (file: File | null) => setSelectedFile(file)
 
     const deleteFileHandler = () => {
         if (selectedFile) {
@@ -64,43 +61,39 @@ export default function FileEditorApp(): React.ReactElement {
     }
 
     return (
-        <>
-            <div className={"file-editor-app-icon " + (isOpen ? "open" : "")} onClick={() => setIsOpen(!isOpen)}></div>
-            <AppWindow
-                appID="file-editor-app"
-                isOpen={isOpen}
-                closeFunc={() => setIsOpen(false)}
-                displayName="File Editor"
-                style={{ height: "70vh" }}
-            >
-                <div className="file-explorer">
-                    {
-                        files?.map((file: File, index: number) => (
-                            <FileCard
-                                file={file}
-                                key={`fc-${index}`}
-                                onClick={fileClickHandler}
-                                selected={selectedFile ? selectedFile.date === file.date : false}
-                            />
-                        ))
+        <AppWindow
+            appID="file-editor-app"
+            displayName="File Editor"
+            style={{ height: "70vh" }}
+            iconID="file-editor"
+        >
+            <div className="file-explorer">
+                {
+                    files?.map((file: File, index: number) => (
+                        <FileCard
+                            file={file}
+                            key={`fc-${index}`}
+                            onClick={fileClickHandler}
+                            selected={selectedFile ? selectedFile.date === file.date : false}
+                        />
+                    ))
+                }
+            </div>
+            <div className="editor">
+                <div className="tools">
+                    <input type="text" placeholder="Title" id="file-title-input" />
+                    {selectedFile ?
+                        <>
+                            <button onClick={() => fileClickHandler(null)}>NEW FILE</button>
+                            <button onClick={deleteFileHandler}>DELETE</button>
+                        </>
+                        :
+                        <button onClick={saveNewFile}>SAVE</button>
                     }
                 </div>
-                <div className="editor">
-                    <div className="tools">
-                        <input type="text" placeholder="Title" id="file-title-input" />
-                        {selectedFile ?
-                            <>
-                                <button onClick={() => fileClickHandler(null)}>NEW FILE</button>
-                                <button onClick={deleteFileHandler}>DELETE</button>
-                            </>
-                            :
-                            <button onClick={saveNewFile}>SAVE</button>
-                        }
-                    </div>
-                    <textarea id="file-textarea"></textarea>
-                </div>
-            </AppWindow>
-        </>
+                <textarea id="file-textarea"></textarea>
+            </div>
+        </AppWindow>
     )
 }
 

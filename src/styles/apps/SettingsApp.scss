@@ -1,15 +1,5 @@
 
-.settings-app-icon {
-    width: 70px;
-    height: 70px;
-    background: radial-gradient(circle, rgba(58,180,177,1) 0%, rgba(69,76,252,1) 100%);;
-    border-radius: 10px;
-    margin: 0px 10px;
-}
-
 #settings-app {
-    color: white;
-
     .user-manager {
         display: flex;
         flex-direction: column;

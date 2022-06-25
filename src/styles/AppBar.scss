@@ -15,8 +15,41 @@
         display: flex;
         justify-content: space-evenly;
 
-        .open {
-            border-bottom: 5px solid white;
+        
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            margin: 0px 10px;
+            cursor: pointer;
+            
+            &.open {
+                border-bottom: 5px solid white;
+            }
+
+            &.settings {
+                background: radial-gradient(circle, rgba(58,180,177,1) 0%, rgba(69,76,252,1) 100%);;
+            }
+
+            &.rss-reader {
+                background: radial-gradient(circle, rgba(112,180,58,1) 23%, rgba(69,252,164,1) 100%);
+            }
+
+            &.gallery {
+                background: radial-gradient(circle, rgba(207,61,215,1) 23%, rgba(149,34,177,1) 64%);
+            }
+
+            &.camera {
+                background: radial-gradient(circle, rgba(52,80,147,1) 23%, rgba(0,0,0,1) 64%);
+            }
+
+            &.browser {
+                background: radial-gradient(circle, rgba(255,221,82,1) 23%, rgba(206,214,0,1) 100%);
+            }
+
+            &.file-editor {
+                background: radial-gradient(circle, rgba(255,160,82,1) 23%, rgba(214,86,0,1) 100%);;
+            }
         }
     }
 }

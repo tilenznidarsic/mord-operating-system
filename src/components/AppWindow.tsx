@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react"
 import { getHighestZindex } from "../helpers/getHighestZindex"
+import ReactDOM from "react-dom"
 
 
 type AppWindowProps = {
     appID: string,
-    isOpen: boolean,
     children?: React.ReactNode,
-    closeFunc: () => void,
     displayName?: string,
+    iconID: string, 
     style?: Object
 }
 
-
-export default function AppWindow({ appID, isOpen, children, closeFunc, displayName="", style={} }: AppWindowProps): React.ReactElement {
+export default function AppWindow({ appID, children, displayName="", style={}, iconID }: AppWindowProps): React.ReactElement {
     const [zIndex, setZIndex] = useState<number>(0)
+    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     useEffect(() => {
         const element = (document.getElementById(appID) as HTMLElement)
@@ -39,8 +39,9 @@ export default function AppWindow({ appID, isOpen, children, closeFunc, displayN
             style={{ display: isOpen ? "flex" : "none", zIndex, ...style }}
             onMouseDown={() => setZIndex(getHighestZindex() + 1)}
         >
+            <AppIcon isOpen={isOpen} toggleFunc={() => setIsOpen(!isOpen)} iconID={iconID} />
             <div className="header" id={appID + "-header"}>
-                <button className="close-btn" onClick={closeFunc}></button>
+                <button className="close-btn" onClick={() => setIsOpen(false)}></button>
                 <h1>{displayName}</h1>
             </div>
             <div className="content">
@@ -48,6 +49,23 @@ export default function AppWindow({ appID, isOpen, children, closeFunc, displayN
             </div>
         </div>
     )
+}
+
+const AppIcon = ({ isOpen, toggleFunc, iconID }: any) => {
+    const [el, setEl] = useState<any>(null)
+
+    useEffect(() => {
+        setEl(document.getElementById("app-bar-container"))
+    }, [])
+
+    if (el) {
+        return ReactDOM.createPortal(
+            <div className={`app-icon ${iconID} ` + (isOpen ? "open" : "")} onClick={toggleFunc}></div>,
+            el
+        )
+    }
+
+    return <></>
 }
 
 function dragElement(elmnt: HTMLElement) {

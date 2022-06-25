@@ -1,4 +1,4 @@
-import React, {useContext, useState } from "react"
+import React, {useContext } from "react"
 import { LS_USERS_KEY } from "../../constants"
 import { User } from "../../types/User.type"
 import AppWindow from "../AppWindow"
@@ -9,7 +9,6 @@ import CryptoJS from 'crypto-js';
 export default function SettingsApp(): React.ReactElement {
     const usersDB = JSON.parse(localStorage.getItem(LS_USERS_KEY) || "{}")
     const { authenticatedUser } = useContext(MordOSContext)
-    const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const changePassHandler = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
@@ -53,44 +52,40 @@ export default function SettingsApp(): React.ReactElement {
     }
     const userColors = ["#2094fa", "#32a852", "#eaed3b", "#fa205a"]
     return (
-        <>
-            <div className={"settings-app-icon " + (isOpen ? "open" : "") } onClick={() => setIsOpen(!isOpen)}></div>
-            <AppWindow
-                appID="settings-app"
-                isOpen={isOpen}
-                closeFunc={() => setIsOpen(false)}
-                displayName="Settings"
-            >
-                <div className="user-manager">
-                    <h1>Manage users</h1>
-                    {
-                        usersDB.map((user: User, index: number) => (
-                            <div className="user-card" key={`uc-${index}`}>
-                                <div className="info">
-                                    <div className="user-color" style={{ background: userColors[index]}}></div>
-                                    <h2>{user.name}</h2>
-                                </div>
-                                {user.name === authenticatedUser.name && (
-                                    <form>
-                                        <input type="password" placeholder="Current password" id="old-password-input" />
-                                        <input type="password" placeholder="New password" id="new-password-input" />
-                                        <input type="submit" value="Change" onClick={changePassHandler} />
-                                    </form>
-                                )}
+        <AppWindow
+            appID="settings-app"
+            displayName="Settings"
+            iconID="settings"
+        >
+            <div className="user-manager">
+                <h1>Manage users</h1>
+                {
+                    usersDB.map((user: User, index: number) => (
+                        <div className="user-card" key={`uc-${index}`}>
+                            <div className="info">
+                                <div className="user-color" style={{ background: userColors[index]}}></div>
+                                <h2>{user.name}</h2>
                             </div>
-                        ))
-                    }
-                    {usersDB.length < 4 &&
-                        <div className="new-user-card">
-                            <form>
-                                <input type="text" placeholder="Name" id="new-user-name-input" />
-                                <input type="password" placeholder="Password" id="new-user-pass-input" />
-                                <input type="submit" value="Create" onClick={addNewUserHandler} />
-                            </form>
+                            {user.name === authenticatedUser.name && (
+                                <form>
+                                    <input type="password" placeholder="Current password" id="old-password-input" />
+                                    <input type="password" placeholder="New password" id="new-password-input" />
+                                    <input type="submit" value="Change" onClick={changePassHandler} />
+                                </form>
+                            )}
                         </div>
-                    }
-                </div>
-            </AppWindow>
-        </>
+                    ))
+                }
+                {usersDB.length < 4 &&
+                    <div className="new-user-card">
+                        <form>
+                            <input type="text" placeholder="Name" id="new-user-name-input" />
+                            <input type="password" placeholder="Password" id="new-user-pass-input" />
+                            <input type="submit" value="Create" onClick={addNewUserHandler} />
+                        </form>
+                    </div>
+                }
+            </div>
+        </AppWindow>
     )
 }
