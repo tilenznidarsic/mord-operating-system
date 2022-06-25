@@ -4,6 +4,10 @@
 @import "./LoginPage.scss";
 @import "./StatusBar.scss";
 @import "./AppBar.scss";
+@import "./AppWindow.scss";
+@import "./SettingsApp.scss";
+@import "./OSPage.scss";
+@import "./RssReaderApp.scss";
 
 * {
     padding: 0px;
@@ -14,7 +18,8 @@
 body {
     font-family: 'Anek Malayalam', sans-serif;
     background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background: linear-gradient(90deg, rgba(131,58,180,0.7) 0%, rgba(253,29,29,0.7) 50%, rgba(252,176,69,0.7) 100%);
+    overflow: hidden;
 }
 
 .app {

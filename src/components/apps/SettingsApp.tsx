@@ -38,7 +38,7 @@ export default function SettingsApp(): React.ReactElement {
         const newUserName = (document.getElementById("new-user-name-input") as HTMLInputElement)
         const newUserPass = (document.getElementById("new-user-pass-input") as HTMLInputElement)
 
-        if (!usersDB.find((user: User) => user.name === newUserName.value)) {
+        if (!usersDB.find((user: User) => user.name === newUserName.value) && newUserName.value && newUserPass.value) {
             localStorage.setItem(LS_USERS_KEY, JSON.stringify([
                 ...usersDB,
                 {
@@ -54,7 +54,7 @@ export default function SettingsApp(): React.ReactElement {
     const userColors = ["#2094fa", "#32a852", "#eaed3b", "#fa205a"]
     return (
         <>
-            <div className={"settings-app-icon " + (isOpen ? "open" : "") } onClick={() => setIsOpen(true)}></div>
+            <div className={"settings-app-icon " + (isOpen ? "open" : "") } onClick={() => setIsOpen(!isOpen)}></div>
             <AppWindow
                 appID="settings-app"
                 isOpen={isOpen}

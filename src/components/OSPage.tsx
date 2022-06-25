@@ -7,10 +7,16 @@ import StatusBar from "./StatusBar"
 export default function OSPage(): React.ReactElement {
     const user = useAuthGuard()
 
-    return (
-        <div className="os-page">
-            <StatusBar username={user ? user.name : ""} />
-            <AppBar />
-        </div>
-    )
+    if (user) {
+        return (
+            <div className="os-page">
+                <StatusBar username={user.name} />
+                <div className="desktop"></div>
+                <AppBar />
+            </div>
+        )
+    }
+    else {
+        return <></>
+    }
 }

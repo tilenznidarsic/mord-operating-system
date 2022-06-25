@@ -3,11 +3,8 @@ import { LS_USERS_KEY } from "../constants"
 import { MordOSContext } from "./StoreProvider"
 import { useNavigate } from "react-router-dom"
 import CryptoJS from 'crypto-js';
+import { User } from "../types/User.type"
 
-type User = {
-    name: string,
-    password: string
-}
 
 export default function LoginPage(): React.ReactElement {
     const { setAuthenticatedUser } = useContext(MordOSContext)

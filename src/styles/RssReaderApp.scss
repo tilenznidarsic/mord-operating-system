@@ -1,0 +1,55 @@
+
+
+.rss-reader-app-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    background: rgb(41, 175, 7);
+    margin: 0px 10px;
+}
+
+#rss-reader-app {
+    color: white;
+    
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .rss-post {
+            width: 100%;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+
+            .post-header {
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+            &:nth-child(odd) {
+                background: rgb(142, 142, 142);
+            }
+        }
+
+        .pager {
+            width: 30%;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 20px 0px;
+
+            span {
+                font-size: 20px;
+                font-weight: 800;
+            }
+
+            button {
+                padding: 5px;
+                border: none;
+                background: black;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
