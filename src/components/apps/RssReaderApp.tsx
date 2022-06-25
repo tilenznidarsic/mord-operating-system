@@ -35,7 +35,11 @@ export default function RssReaderApp(): React.ReactElement {
                 displayName="RSS Reader"
             >
                 {data.slice((page*20) - 20, page * 20).map((post: any, index: number) => (
-                    <RssPost post={post} page={page} />
+                    <RssPost
+                        key={`rssp-${index}`}
+                        post={post}
+                        page={page}
+                    />
                 ))}
                 <div className="pager">
                     <button onClick={() => pageHandler(-1)}>{"<"}</button>

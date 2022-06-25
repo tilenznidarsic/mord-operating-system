@@ -34,6 +34,8 @@ export default function CameraApp(): React.ReactElement {
                 date: moment().unix()
             }
         ]))
+
+        setImage(null)
     }
 
     return (

@@ -11,7 +11,7 @@ export default function OSPage(): React.ReactElement {
         return (
             <div className="os-page">
                 <StatusBar username={user.name} />
-                <div className="desktop"></div>
+                <div className="desktop" id="desktop"></div>
                 <AppBar />
             </div>
         )

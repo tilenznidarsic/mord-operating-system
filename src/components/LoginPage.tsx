@@ -72,7 +72,7 @@ export default function LoginPage(): React.ReactElement {
             </div>
             <form>
                 <input type="text" placeholder="username" id="username-input" value="admin" />
-                <input type="password" placeholder="password" id="password-input" value="admin123" />
+                <input type="password" placeholder="password" id="password-input" value="admin" />
                 <input type="submit" onClick={handleLogin} />
             </form>
         </div>
