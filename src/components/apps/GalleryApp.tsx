@@ -6,15 +6,23 @@ import AppWindow from "../AppWindow"
 export default function GalleryApp(): React.ReactElement {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [selectedImage, setSelectedImage] = useState<any>(null)
-    const [data, setData] = useState<Array<any>>(JSON.parse(localStorage.getItem(LS_PHOTOS_KEY) ||"[]"))
+    const [data, setData] = useState<Array<any>>(JSON.parse(localStorage.getItem(LS_PHOTOS_KEY) ||"[]").reverse())
 
     useEffect(() => {
-        (async () => {
-            await fetch("https://jsonplaceholder.typicode.com/photos")
-                .then(res => res.json())
-                .then(jsn => setData([...data, ...jsn.slice(0, 20)]))
-        })()
+        // initial fetch
+        getImages()
+
+        // listen localstorage changes and update data
+        document.addEventListener("itemInserted", getImages);
+
+        return () => document.removeEventListener("itemInserted", getImages);
     }, [])
+
+    const getImages = async () => {
+        await fetch("https://jsonplaceholder.typicode.com/photos")
+            .then(res => res.json())
+            .then(jsn => setData([...JSON.parse(localStorage.getItem(LS_PHOTOS_KEY) ||"[]").reverse(), ...jsn.slice(0, 20)]))
+    }
 
     return (
         <>
