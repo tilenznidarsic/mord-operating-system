@@ -7,8 +7,7 @@
 
 ## Apps
 
--   file explorer
--   file editor
+-   File editor
 -   RSS reader
 -   Camera app
 -   Gallery app

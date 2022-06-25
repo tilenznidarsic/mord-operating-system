@@ -71,8 +71,8 @@ export default function LoginPage(): React.ReactElement {
                 <h1 className="logo-letter"  style={{ left: "85%" }} id="logo-letter-S">S</h1>
             </div>
             <form>
-                <input type="text" placeholder="username" id="username-input" value="admin" />
-                <input type="password" placeholder="password" id="password-input" value="admin" />
+                <input type="text" placeholder="username" id="username-input" />
+                <input type="password" placeholder="password" id="password-input" />
                 <input type="submit" onClick={handleLogin} />
             </form>
         </div>
