@@ -7,6 +7,8 @@
     align-content: center;
 
     .parallax-logo {
+        user-select: none;
+        
         .logo-letter {
             font-size: 20rem;
             color: white;

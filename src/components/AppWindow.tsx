@@ -7,11 +7,12 @@ type AppWindowProps = {
     isOpen: boolean,
     children?: React.ReactNode,
     closeFunc: () => void,
-    displayName?: string 
+    displayName?: string,
+    style?: Object
 }
 
 
-export default function AppWindow({ appID, isOpen, children, closeFunc, displayName="" }: AppWindowProps): React.ReactElement {
+export default function AppWindow({ appID, isOpen, children, closeFunc, displayName="", style={} }: AppWindowProps): React.ReactElement {
     const [zIndex, setZIndex] = useState<number>(0)
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export default function AppWindow({ appID, isOpen, children, closeFunc, displayN
         <div
             className="app-window"
             id={appID}
-            style={{ display: isOpen ? "flex" : "none", zIndex }}
+            style={{ display: isOpen ? "flex" : "none", zIndex, ...style }}
             onMouseDown={() => setZIndex(getHighestZindex() + 1)}
         >
             <div className="header" id={appID + "-header"}>
