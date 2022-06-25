@@ -5,6 +5,23 @@
     display: flex;
     justify-content: center;
     align-content: center;
+
+    .parallax-logo {
+        .logo-letter {
+            font-size: 20rem;
+            color: white;
+            position: absolute;
+            opacity: 0.2;
+
+            &:nth-child(odd) {
+                top: 25%
+            }
+    
+            &:nth-child(even) {
+                bottom: 25%
+            }
+        }
+    }
     
     form {
         display: flex;
