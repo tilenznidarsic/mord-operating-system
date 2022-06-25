@@ -1,0 +1,30 @@
+
+.browser-app-icon {
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, rgba(255,221,82,1) 23%, rgba(206,214,0,1) 100%);
+    border-radius: 10px;
+    margin: 0px 10px;
+}
+
+#browser-app {
+    .content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border-radius: inherit;
+
+        input {
+            height: 40px;
+            padding: 10px;
+            border: none;
+        }
+
+        iframe {
+            height: 100%;
+            border: none;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+    }
+}
