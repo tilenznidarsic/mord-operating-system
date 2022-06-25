@@ -1,0 +1,52 @@
+
+.camera-app-icon {
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, rgba(52,80,147,1) 23%, rgba(0,0,0,1) 64%);
+    border-radius: 10px;
+    margin: 0px 10px;
+}
+
+#camera-app {
+    color: white;
+
+    .content {
+        border-radius: inherit;
+        position: relative;
+        
+        video {
+            width: 100%;
+            height: 100%;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            
+            button {
+                width: 70px;
+                height: 70px;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                
+                &.record {
+                    background: rgb(255, 42, 42);
+                }
+
+                &.save {
+                    background: lightgreen;
+                }
+
+                &.cancel {
+                    background: orange;
+                }
+            }
+        }
+    }
+}
