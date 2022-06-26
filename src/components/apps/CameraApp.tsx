@@ -20,8 +20,6 @@ export default function CameraApp(): React.ReactElement {
       [webcamRef]
     );
 
-    const cancelHandler = () => setImage(null)
-
     const saveHandler = () => {
         const imagesDB: Array<Photo> = JSON.parse(localStorage.getItem(LS_PHOTOS_KEY) || "[]")
         
@@ -60,7 +58,7 @@ export default function CameraApp(): React.ReactElement {
                     :
                     <>
                         <button className="save" onClick={saveHandler}>SAVE</button>
-                        <button className="cancel" onClick={cancelHandler}>CANCEL</button>
+                        <button className="cancel" onClick={() => setImage(null)}>CANCEL</button>
                     </>
                 }
                 </div>
