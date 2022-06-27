@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { getHighestZindex } from "../helpers/getHighestZindex"
-import ReactDOM from "react-dom"
+import AppIcon from "./AppIcon"
 
 
 type AppWindowProps = {
@@ -39,7 +39,7 @@ export default function AppWindow({ appID, children, displayName="", style={}, i
             style={{ display: isOpen ? "flex" : "none", zIndex, ...style }}
             onMouseDown={() => setZIndex(getHighestZindex() + 1)}
         >
-            <AppIcon isOpen={isOpen} toggleFunc={() => setIsOpen(!isOpen)} iconID={iconID} />
+            <AppIcon isOpen={isOpen} toggleFunc={() => setIsOpen(!isOpen)} iconID={iconID} title={displayName} />
             <div className="header" id={appID + "-header"}>
                 <button className="close-btn" onClick={() => setIsOpen(false)}></button>
                 <h1>{displayName}</h1>
@@ -49,23 +49,6 @@ export default function AppWindow({ appID, children, displayName="", style={}, i
             </div>
         </div>
     )
-}
-
-const AppIcon = ({ isOpen, toggleFunc, iconID }: any) => {
-    const [el, setEl] = useState<any>(null)
-
-    useEffect(() => {
-        setEl(document.getElementById("app-bar-container"))
-    }, [])
-
-    if (el) {
-        return ReactDOM.createPortal(
-            <div className={`app-icon ${iconID} ` + (isOpen ? "open" : "")} onClick={toggleFunc}></div>,
-            el
-        )
-    }
-
-    return <></>
 }
 
 function dragElement(elmnt: HTMLElement) {

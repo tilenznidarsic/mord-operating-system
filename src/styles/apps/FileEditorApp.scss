@@ -4,6 +4,7 @@
         height: 100%;
         display: flex;
         border-radius: inherit;
+        overflow: hidden;
 
         .file-explorer {
             flex: 1;
@@ -66,10 +67,6 @@
                 border: none;
                 padding: 10px;
                 border-bottom-right-radius: inherit;
-
-                &:focus {
-                    outline: none;
-                }
             }
         }
     }

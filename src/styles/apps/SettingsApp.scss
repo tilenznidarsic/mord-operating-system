@@ -50,18 +50,19 @@
         }
 
         .new-user-card {
-            width: 50%;
             margin: 10px;
             
             form {
                 padding: 20px;
                 border-radius: 10px;
                 display: flex;
+                flex-direction: column;
                 justify-content: space-evenly;
                 align-items: center;
                 background-color: rgb(127, 207, 141);
 
                 input {
+                    margin: 5px;
                     text-align: center;
                     border: none;
                     background: none;
