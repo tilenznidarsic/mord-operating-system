@@ -1,11 +1,11 @@
 # TASK Mord OS
 
-## Functionality
+## FUNCTIONALITY
 
 -   authentication
 -   looks like normal os
 
-## Apps
+## APPS
 
 -   File editor
 -   RSS reader
@@ -13,3 +13,12 @@
 -   Gallery app
 -   Web browser
 -   Settings
+
+## POSSIBLE IMPROVEMENTS
+
+-   swap zindex of windows apps insted of increasing it
+-   add scss mixins for duplicated code
+-   add "resize" functionality to AppWindow
+-   add permissions to Users
+-   use memoization for performance
+-   create responsive design

@@ -1,14 +1,13 @@
 import moment from "moment"
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { LS_FILES_KEY } from "../../constants"
 import AppWindow from "../AppWindow"
-import { MordOSContext } from "../StoreProvider"
 import { File } from "../../types/File.type"
+import { useUserFiles } from "../../customHooks/useUserFiles"
 
 
 export default function FileEditorApp(): React.ReactElement {
-    const { authenticatedUser } = useContext(MordOSContext)
-    const [files, setFiles] = useState<Array<File>>(JSON.parse(localStorage.getItem(LS_FILES_KEY) ||"[]"))
+    const { files, authenticatedUser } = useUserFiles<File>(LS_FILES_KEY)
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     
     const saveNewFile = () => {
@@ -28,8 +27,6 @@ export default function FileEditorApp(): React.ReactElement {
             ...filesDB,
             newFile
         ]))
-
-        setFiles([...filesDB, newFile])
 
         textArea.value = ""
         fileTitle.value = ""
@@ -54,9 +51,9 @@ export default function FileEditorApp(): React.ReactElement {
 
     const deleteFileHandler = () => {
         if (selectedFile) {
-            const newFiles = files.filter((file: File) => file.date !== selectedFile.date)
+            const filesDB = JSON.parse(localStorage.getItem(LS_FILES_KEY) || "[]")
+            const newFiles = filesDB.filter((file: File) => file.date !== selectedFile.date)
             localStorage.setItem(LS_FILES_KEY, JSON.stringify(newFiles))
-            setFiles(newFiles)
         }
     }
 

@@ -1,14 +1,14 @@
-import React, {useContext } from "react"
-import { LS_USERS_KEY } from "../../constants"
-import { User } from "../../types/User.type"
+import React from "react"
+import { LS_USERS_KEY, USER_COLORS } from "../../constants"
 import AppWindow from "../AppWindow"
-import { MordOSContext } from "../StoreProvider"
 import CryptoJS from 'crypto-js';
+import { User } from "../../types/User.type"
+import useUsers from "../../customHooks/useUsers"
+import moment from "moment";
 
 
 export default function SettingsApp(): React.ReactElement {
-    const usersDB = JSON.parse(localStorage.getItem(LS_USERS_KEY) || "{}")
-    const { authenticatedUser } = useContext(MordOSContext)
+    const { users, authenticatedUser } = useUsers()
 
     const changePassHandler = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
@@ -18,9 +18,9 @@ export default function SettingsApp(): React.ReactElement {
 
         if (authenticatedUser.password === CryptoJS.SHA256(oldPass.value).toString(CryptoJS.enc.Hex)) {
             const newUsers = [
-                ...usersDB.filter((user: User) => user.name !== authenticatedUser.name),
+                ...users.filter((user: User) => user.name !== authenticatedUser.name),
                 {
-                    name: authenticatedUser.name,
+                    ...authenticatedUser,
                     password: CryptoJS.SHA256(newPass.value).toString(CryptoJS.enc.Hex)
                 }
             ]
@@ -37,12 +37,14 @@ export default function SettingsApp(): React.ReactElement {
         const newUserName = (document.getElementById("new-user-name-input") as HTMLInputElement)
         const newUserPass = (document.getElementById("new-user-pass-input") as HTMLInputElement)
 
-        if (!usersDB.find((user: User) => user.name === newUserName.value) && newUserName.value && newUserPass.value) {
+        if (!users.find((user: User) => user.name === newUserName.value) && newUserName.value && newUserPass.value) {
             localStorage.setItem(LS_USERS_KEY, JSON.stringify([
-                ...usersDB,
+                ...users,
                 {
                     name: newUserName.value,
-                    password: CryptoJS.SHA256(newUserPass.value).toString(CryptoJS.enc.Hex)
+                    password: CryptoJS.SHA256(newUserPass.value).toString(CryptoJS.enc.Hex),
+                    profile: USER_COLORS[users.length],
+                    date: moment().unix()
                 }
             ]))
 
@@ -50,7 +52,6 @@ export default function SettingsApp(): React.ReactElement {
             newUserPass.value = ""
         }
     }
-    const userColors = ["#2094fa", "#32a852", "#eaed3b", "#fa205a"]
     return (
         <AppWindow
             appID="settings-app"
@@ -60,10 +61,10 @@ export default function SettingsApp(): React.ReactElement {
             <div className="user-manager">
                 <h1>Manage users</h1>
                 {
-                    usersDB.map((user: User, index: number) => (
+                    users.map((user: User, index: number) => (
                         <div className="user-card" key={`uc-${index}`}>
                             <div className="info">
-                                <div className="user-color" style={{ background: userColors[index]}}></div>
+                                <div className="user-color" style={{ background: user.profile }}></div>
                                 <h2>{user.name}</h2>
                             </div>
                             {user.name === authenticatedUser.name && (
@@ -76,7 +77,7 @@ export default function SettingsApp(): React.ReactElement {
                         </div>
                     ))
                 }
-                {usersDB.length < 4 &&
+                {authenticatedUser.name === "admin" && users.length < 4 &&
                     <div className="new-user-card">
                         <form>
                             <input type="text" placeholder="Name" id="new-user-name-input" />

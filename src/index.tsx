@@ -8,9 +8,9 @@ var originalSetItem = localStorage.setItem;
 localStorage.setItem = function(key, value) {
   var event = new Event('itemInserted');
 
-  document.dispatchEvent(event);
-  
   originalSetItem.apply(this, [key, value]);
+  
+  document.dispatchEvent(event);
 };
 
 const root = ReactDOM.createRoot(

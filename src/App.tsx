@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from './components/LoginPage';
-import OSPage from './components/OSPage';
+import LoginPage from './components/pages/LoginPage';
+import OSPage from './components/pages/OSPage';
 import StoreProvider from './components/StoreProvider';
-import { setupDefaultUser } from './helpers/setupDefaultUser';
+import { setupDefaultUser } from "./functions";
 
 
 function App(): React.ReactElement {

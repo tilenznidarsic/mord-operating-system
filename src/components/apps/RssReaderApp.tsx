@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react"
 import AppWindow from "../AppWindow"
 
 
+type RssPost = {
+    postId: number,
+    id: number,
+    name: string,
+    email: string,
+    body: string
+}
+
+const POSTS_PER_PAGE = 20;
+
 export default function RssReaderApp(): React.ReactElement {
-    const [data, setData] = useState([])
+    const [posts, setPosts] = useState<Array<RssPost>>([])
     const [page, setPage] = useState<number>(1)
 
     useEffect(() => {
         (async () => {
             await fetch("https://jsonplaceholder.typicode.com/comments")
                 .then(res => res.json())
-                .then(jsn => setData(jsn))
+                .then(jsn => setPosts(jsn))
         })()
     }, [])
 
     const pageHandler = (dir: number) => {
-        if (dir > 0) {
+        if (dir > 0 && POSTS_PER_PAGE * page < posts.length) {
             setPage(page + 1)
         }
         else if (dir < 0) {
@@ -29,8 +39,8 @@ export default function RssReaderApp(): React.ReactElement {
             displayName="RSS Reader"
             iconID={"rss-reader"}
         >
-            {data.slice((page*20) - 20, page * 20).map((post: any, index: number) => (
-                <RssPost
+            {posts.slice((page*POSTS_PER_PAGE) - POSTS_PER_PAGE, page * POSTS_PER_PAGE).map((post: any, index: number) => (
+                <RssPostCard
                     key={`rssp-${index}`}
                     post={post}
                     page={page}
@@ -45,8 +55,7 @@ export default function RssReaderApp(): React.ReactElement {
     )
 }
 
-
-const RssPost = ({ post, page }: any) => {
+const RssPostCard = ({ post, page }: { post: RssPost, page: number}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     useEffect(() => {

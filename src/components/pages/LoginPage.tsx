@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
-import { LS_USERS_KEY } from "../constants"
-import { MordOSContext } from "./StoreProvider"
+import { LS_USERS_KEY } from "../../constants"
+import { MordOSContext } from "../StoreProvider"
 import { useNavigate } from "react-router-dom"
 import CryptoJS from 'crypto-js';
-import { User } from "../types/User.type"
-import { useParallax } from "../customHooks/useParallax";
+import { User } from "../../types/User.type"
+import { useParallax } from "../../customHooks/useParallax";
 
 
 export default function LoginPage(): React.ReactElement {
