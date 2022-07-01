@@ -1,5 +1,10 @@
 # TASK Mord OS
 
+## DEFAULT CREDENTIALS
+
+-   username: admin
+-   password: admin123
+
 ## FUNCTIONALITY
 
 -   authentication
